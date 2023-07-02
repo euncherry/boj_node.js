@@ -65,5 +65,5 @@ console.log(answer)
 
 
 
-# 💟 업로드 방식
+## 💟 업로드 방식
 This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
