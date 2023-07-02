@@ -12,6 +12,7 @@ javascript를 이용해서 백준 알고리즘 풀이
 
 ### vscode
 process.platform === "linux" -> boj
+
 process.platform === "/dev/stdin" -> vscode
 ``` js
 const fs = require("fs");
