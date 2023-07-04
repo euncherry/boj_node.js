@@ -1,4 +1,4 @@
-//15654.N과M(6).s3
+//15656.N과M(7).s3
 /**
  * @method backtracking
  * @inputs 1 2 3 4(x) 배열이 주어짐
@@ -19,15 +19,12 @@ let answer = "";
 const arr = [];
 
 function solution(p) {
-  let tmp = "🥺";
-
   if (p === M) {
     answer += arr.join(" ");
     answer += "\n";
     return;
   }
   for (let i = 0; i < N; i++) {
-    tmp = i;
     arr[p] = inputs[i];
     solution(p + 1);
   }
