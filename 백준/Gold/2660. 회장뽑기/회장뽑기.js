@@ -62,7 +62,6 @@ for (let i = 0; i < N; i++) {
   if (score[i] === minscore) cand.push(i + 1);
 }
 
-const answer = `${minscore} ${cand.length}`;
 
-console.log(answer);
+console.log( `${minscore} ${cand.length}`);
 console.log(cand.join(" "));
