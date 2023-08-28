@@ -1,3 +1,9 @@
+const QNUM = {
+  number: 5214,
+  title: `환승`,
+  level: `g2`,
+};
+
 /**
  * @method graph
  * @note
@@ -14,11 +20,12 @@ const graph = [...Array(N + 1)].map((v) => [...Array()]);
 const hyper = [];
 for (let i = 1; i <= M; i++) {
   const arr = inputs[i].split(" ").map(Number);
-  hyper[i] = [...arr];
+  graph[i + N] = [...arr];
   arr.forEach((v) => {
-    graph[v].push(i);
+    graph[v].push(i + N);
   });
 }
+// console.table(graph);
 
 function BFS(node) {
   const queue = {
@@ -38,25 +45,19 @@ function BFS(node) {
       return this.rear - this.front;
     },
   };
-  const vis = [...Array(N + 1).fill(0)];
-  const hVis = [];
+  const vis = [...Array(N + M + 1).fill(-1)];
   queue.enQueue(node);
-  vis[node] = 1;
+  vis[node] = 0;
 
   while (1) {
     if (queue.size() === 0) break;
     const val = queue.deQueue();
     for (let i = 0; i < graph[val].length; i++) {
-      const hVal = graph[val][i];
-      if (hVis[hVal]) continue;
-      hVis[hVal] = true;
-      for (let j = 0; j < K; j++) {
-        const v = hyper[graph[val][i]][j];
-        if (vis[v] === 0) {
-          if (v === N) return vis[val] + 1;
-          vis[v] = vis[val] + 1;
-          queue.enQueue(v);
-        }
+      const v = graph[val][i];
+      if (vis[v] === -1) {
+        if (v === N) return vis[val] + 1;
+        queue.enQueue(v);
+        vis[v] = vis[val] + 1;
       }
     }
   }
@@ -64,4 +65,6 @@ function BFS(node) {
 }
 
 const answer = BFS(1);
-console.log(answer ? answer : -1);
+console.log(answer === -1 ? -1 : answer / 2 + 1);
+
+// console.log(QNUM);
