@@ -12,7 +12,7 @@ const fs = require("fs");
 
 // const filePath = process.platform === 'linux' ? '/dev/stdin' : 'data.txt';
 const filePath = !process.env.CODESANDBOX_HOST ? "/dev/stdin" : "data.txt";
-let inputs = fs.readFileSync(filePath).toString().trim().split(``);
+let inputs = fs.readFileSync(filePath).toString().trim();
 const len = inputs.length;
 const answer = new Set([...inputs]);
 
