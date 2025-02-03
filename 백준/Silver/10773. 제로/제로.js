@@ -12,19 +12,15 @@ const fs = require("fs");
 const filePath = !process.env.CODESANDBOX_HOST ? "/dev/stdin" : "data.txt";
 
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
-const [K, ...Kn] = input;
-const nums = Kn.map(Number);
+const numbers = input.slice(1).map(Number);
 
 const stack = [];
-let answer = 0;
-nums.forEach((val) => {
-  if (val !== 0) {
-    stack.push(val);
-    answer += val;
+const answer = numbers.reduce((acc, cur) => {
+  if (cur === 0) {
+    return acc - stack.pop();
   }
-  if (val === 0) {
-    answer -= stack.pop();
-  }
-});
+  stack.push(cur);
+  return (acc += cur);
+}, 0);
 
 console.log(answer);
