@@ -1,36 +1,28 @@
+
 const fs = require("fs");
 const filePath = !process.env.CODESANDBOX_HOST ? "/dev/stdin" : "data.txt";
+
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
-input.pop();
+input.pop()
 
-function check(lines) {
+const answer = input.map((str)=>{
   const stack = [];
-  for (let i = 0; i < lines.length; i++) {
-    if (lines[i] === "(" || lines[i] === "[") {
-      stack.push(lines[i]);
+  const len = str.length;
+
+  for(let i = 0 ;i<len ;i++){
+    if(str[i]==='(' || str[i]==='[') stack.push(str[i]);
+    if(str[i]===')'){
+      if(stack[stack.length -1]!== '(' || stack.length === 0) return "no";
+      if(stack[stack.length -1]=== '(') stack.pop();
       continue;
     }
-    if (lines[i] === ")") {
-      if (stack[stack.length - 1] !== "(") {
-        return "no";
-      }
-      stack.pop();
+    if(str[i]===']'){
+      if(stack[stack.length -1]!== '[' || stack.length === 0) return "no";
+      if(stack[stack.length -1]=== '[') stack.pop();
       continue;
     }
-    if (lines[i] === "]") {
-      if (stack[stack.length - 1] !== "[") {
-        return "no";
-      }
-      stack.pop();
-      continue;
-    }
-  }
-  if (stack.length !== 0) return "no";
-  return "yes";
 }
+return stack.length === 0 ? "yes" :"no"
+})
 
-const ans = input.map((lines) => {
-  return check(lines);
-});
-
-console.log(ans.join("\n"));
+console.log(answer.join(`\n`))
